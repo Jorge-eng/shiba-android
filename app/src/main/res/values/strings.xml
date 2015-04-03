@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Shiba</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="action_scan">Scan</string>
+    <string name="message_confirm_sign_out">Are you sure you want to sign out?</string>
 </resources>

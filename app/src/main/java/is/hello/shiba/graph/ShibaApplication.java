@@ -27,7 +27,8 @@ public class ShibaApplication extends Application {
     private void buildGraph() {
         this.graph = ObjectGraph.create(
             new ApiModule(),
-            new BuruberiModule(this, e -> {}, new LogCatLoggerFacade())
+            new BuruberiModule(this, e -> {}, new LogCatLoggerFacade()),
+            new AppModule(this)
         );
     }
 

@@ -12,9 +12,12 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(injects = {
-        ApiPresenter.class
-})
+@Module(
+        injects = {
+                ApiPresenter.class
+        },
+        complete = false
+)
 @SuppressWarnings("UnusedDeclaration")
 public class ApiModule {
     public static final int HTTP_CONNECT_TIMEOUT_MILLIS = 15 * 1000; // 15s
