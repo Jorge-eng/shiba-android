@@ -1,0 +1,2 @@
+include ':app', ':buruberi'
+project(':buruberi').projectDir = new File('../buruberi-android/library')
