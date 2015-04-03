@@ -6,4 +6,8 @@
     <string name="action_sign_out">Sign Out</string>
     <string name="action_scan">Scan</string>
     <string name="message_confirm_sign_out">Are you sure you want to sign out?</string>
+    <string name="title_email">Email</string>
+    <string name="title_password">Password</string>
+    <string name="title_loading">Loading…</string>
+    <string name="title_error">Error</string>
 </resources>

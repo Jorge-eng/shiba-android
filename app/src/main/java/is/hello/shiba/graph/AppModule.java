@@ -9,12 +9,14 @@ import is.hello.buruberi.bluetooth.BuruberiModule;
 import is.hello.shiba.api.ApiModule;
 import is.hello.shiba.ui.LandingFragment;
 import is.hello.shiba.ui.ScanFragment;
+import is.hello.shiba.ui.SignInFragment;
 
 @SuppressWarnings("UnusedDeclaration")
 @Module(
         injects = {
                 LandingFragment.class,
                 ScanFragment.class,
+                SignInFragment.class,
         },
         includes = {
                 BuruberiModule.class, ApiModule.class

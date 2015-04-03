@@ -5,6 +5,10 @@
     <dimen name="gap_medium">16dp</dimen>
     <dimen name="gap_large">25dp</dimen>
 
-    <dimen name="text_normal">14dp</dimen>
-    <dimen name="text_large">17dp</dimen>
+    <dimen name="text_normal">15dp</dimen>
+    <dimen name="text_h1">20dp</dimen>
+    <dimen name="text_h2">17dp</dimen>
+
+    <dimen name="button_corner_radius">3dp</dimen>
+    <dimen name="button_min_height">45dp</dimen>
 </resources>

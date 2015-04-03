@@ -38,6 +38,7 @@ import rx.subjects.ReplaySubject;
         this.preferences = appContext.getSharedPreferences(PREFS_NAME, 0);
 
         setEnvironment(Environment.DEV);
+        this.accessToken.onNext(retrieveAccessToken());
     }
 
 

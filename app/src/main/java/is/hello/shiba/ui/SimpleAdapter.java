@@ -2,6 +2,7 @@ package is.hello.shiba.ui;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,14 @@ import android.widget.TextView;
 import is.hello.shiba.R;
 import rx.functions.Func1;
 
-public class DetailAdapter<T> extends ArrayAdapter<T> {
+public class SimpleAdapter<T> extends ArrayAdapter<T> {
     private final Func1<T, String> getTitle;
     private final Func1<T, String> getDetails;
     private final LayoutInflater inflater;
 
-    public DetailAdapter(@NonNull Context context,
+    public SimpleAdapter(@NonNull Context context,
                          @NonNull Func1<T, String> getTitle,
-                         @NonNull Func1<T, String> getDetails) {
+                         @Nullable Func1<T, String> getDetails) {
         super(context, R.layout.item_detail);
 
         this.getTitle = getTitle;
@@ -35,14 +36,23 @@ public class DetailAdapter<T> extends ArrayAdapter<T> {
             view.setTag(new ViewHolder(view));
         }
 
+        //noinspection unchecked
         ViewHolder holder = (ViewHolder) view.getTag();
         T item = getItem(position);
         holder.title.setText(getTitle.call(item));
-        holder.details.setText(getDetails.call(item));
+        if (getDetails != null) {
+            holder.details.setText(getDetails.call(item));
+        } else {
+            holder.details.setVisibility(View.GONE);
+        }
 
         return view;
     }
 
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        return getView(position, convertView, parent);
+    }
 
     class ViewHolder {
         final TextView title;

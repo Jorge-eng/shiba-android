@@ -53,7 +53,7 @@ public class LandingFragment extends ShibaFragment {
     }
 
     public void signIn(@NonNull View sender) {
-
+        ((MainActivity) getActivity()).pushFragment(new SignInFragment());
     }
 
     public void signOut(@NonNull View sender) {

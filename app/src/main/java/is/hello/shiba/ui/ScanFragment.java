@@ -27,7 +27,7 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private Subscription currentScan;
-    private DetailAdapter<SensePeripheral> adapter;
+    private SimpleAdapter<SensePeripheral> adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
         ListView listView = (ListView) view.findViewById(android.R.id.list);
         listView.setOnItemClickListener(this);
 
-        this.adapter = new DetailAdapter<>(getActivity(), SensePeripheral::getName, SensePeripheral::getAddress);
+        this.adapter = new SimpleAdapter<>(getActivity(), SensePeripheral::getName, SensePeripheral::getAddress);
         listView.setAdapter(adapter);
 
         return view;
@@ -85,5 +85,8 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
         swipeRefreshLayout.setRefreshing(false);
 
         adapter.clear();
+
+        ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
+        errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
     }
 }
