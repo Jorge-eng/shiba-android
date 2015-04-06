@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -20,6 +21,8 @@ public class LandingFragment extends ShibaFragment {
     @Inject ApiPresenter api;
     @Inject BluetoothStack stack;
 
+    private TextView host;
+
     private Button sessionButton;
     private Button scanButton;
 
@@ -27,8 +30,12 @@ public class LandingFragment extends ShibaFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_landing, container, false);
 
-        this.sessionButton = (Button) view.findViewById(R.id.fragment_landing_session);
+        this.host = (TextView) view.findViewById(R.id.fragment_landing_host);
 
+        TextView supportLevel = (TextView) view.findViewById(R.id.fragment_landing_support_level);
+        supportLevel.setText(stack.getDeviceSupportLevel().toString());
+
+        this.sessionButton = (Button) view.findViewById(R.id.fragment_landing_session);
         this.scanButton = (Button) view.findViewById(R.id.fragment_landing_scan);
         scanButton.setOnClickListener(this::scan);
 
@@ -39,6 +46,7 @@ public class LandingFragment extends ShibaFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        bind(api.environment).subscribe(environment -> host.setText(environment.host));
         bind(api.accessToken).subscribe(accessToken -> {
             if (accessToken != null) {
                 sessionButton.setOnClickListener(this::signOut);

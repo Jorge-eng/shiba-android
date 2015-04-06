@@ -11,4 +11,6 @@
     <string name="title_loading">Loading…</string>
     <string name="title_error">Error</string>
     <string name="title_scan">Nearby Senses</string>
+    <string name="title_api_host">Currently Targeting</string>
+    <string name="title_device_support_level">Device Support Level</string>
 </resources>

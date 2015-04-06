@@ -32,7 +32,7 @@ public class SignInFragment extends ShibaFragment {
 
         this.environment = (Spinner) view.findViewById(R.id.fragment_sign_in_environment);
 
-        SimpleAdapter<Environment> adapter = new SimpleAdapter<>(getActivity(), Environment::getName, null);
+        SimpleAdapter<Environment> adapter = new SimpleAdapter<>(getActivity(), e -> e.host, null);
         adapter.addAll(Environment.getAll());
         environment.setAdapter(adapter);
 
@@ -61,6 +61,7 @@ public class SignInFragment extends ShibaFragment {
         bind(api.service.flatMap(s -> s.authorize(credentials))).subscribe(session -> {
             LoadingDialogFragment.close(getFragmentManager());
             api.storeAccessToken(session.getAccessToken());
+            api.setEnvironment(selectedEnvironment);
             getFragmentManager().popBackStack();
         }, e -> {
             LoadingDialogFragment.close(getFragmentManager());
