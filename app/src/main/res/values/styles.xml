@@ -1,15 +1,23 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/accent</item>
         <item name="colorPrimaryDark">@color/accent_dark</item>
         <item name="colorAccent">@color/accent</item>
+        <item name="toolbarStyle">@style/AppTheme.Toolbar</item>
+
+        <item name="android:windowBackground">@android:color/white</item>
 
         <item name="android:textAppearance">@style/AppTheme.Text</item>
-        <item name="android:windowBackground">@android:color/white</item>
         <item name="android:buttonStyle">@style/AppTheme.Button</item>
-        <item name="android:windowContentOverlay">@null</item>
         <item name="android:editTextStyle">@style/AppTheme.EditText</item>
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
     <style name="AppTheme.Text" parent="TextAppearance.AppCompat">
@@ -29,8 +37,8 @@
     <style name="AppTheme.Button">
         <item name="android:background">@drawable/button_selector</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">@dimen/text_button</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">@dimen/gap_small</item>
         <item name="android:paddingBottom">@dimen/gap_small</item>

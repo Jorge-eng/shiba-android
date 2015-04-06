@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/buruberi/buruberi.iml" filepath="$PROJECT_DIR$/buruberi/buruberi.iml" />
       <module fileurl="file://$PROJECT_DIR$/../buruberi-android/library/buruberi.iml" filepath="$PROJECT_DIR$/../buruberi-android/library/buruberi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../buruberi-android/library/library.iml" filepath="$PROJECT_DIR$/../buruberi-android/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/shiba-android.iml" filepath="$PROJECT_DIR$/shiba-android.iml" />
     </modules>
   </component>

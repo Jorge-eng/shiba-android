@@ -78,5 +78,5 @@ dependencies {
     compile 'io.reactivex:rxjava:1.0.0'
     compile 'io.reactivex:rxandroid:0.23.0'
 
-    compile project(':buruberi')
+    compile project(':buruberi:library')
 }

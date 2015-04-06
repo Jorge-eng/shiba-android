@@ -3,12 +3,14 @@ package is.hello.shiba.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -22,10 +24,11 @@ import is.hello.shiba.graph.ShibaFragment;
 import rx.Observable;
 import rx.Subscription;
 
-public class ScanFragment extends ShibaFragment implements AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class ScanFragment extends ShibaFragment implements AdapterView.OnItemClickListener {
     @Inject BluetoothStack stack;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar activityIndicator;
+    private MenuItem scanItem;
     private Subscription currentScan;
     private SimpleAdapter<SensePeripheral> adapter;
 
@@ -38,15 +41,30 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_refreshable, container, false);
+        View view = inflater.inflate(R.layout.fragment_scan, container, false);
 
-        this.swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        this.activityIndicator = (ProgressBar) view.findViewById(R.id.fragment_scan_activity);
+
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.fragment_scan_toolbar);
+        toolbar.inflateMenu(R.menu.menu_scan);
+        this.scanItem = toolbar.getMenu().findItem(R.id.action_scan);
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_scan: {
+                    beginScan();
+                    return true;
+                }
+
+                default: {
+                    return false;
+                }
+            }
+        });
 
         ListView listView = (ListView) view.findViewById(android.R.id.list);
         listView.setOnItemClickListener(this);
 
-        this.adapter = new SimpleAdapter<>(getActivity(), SensePeripheral::getName, SensePeripheral::getAddress);
+        this.adapter = new SimpleAdapter<>(getActivity(), SensePeripheral::getName, SensePeripheral::getDeviceId);
         listView.setAdapter(adapter);
 
         return view;
@@ -57,8 +75,7 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
         super.onViewCreated(view, savedInstanceState);
 
         if (currentScan == null && adapter.isEmpty()) {
-            swipeRefreshLayout.setRefreshing(true);
-            onRefresh();
+            beginScan();
         }
     }
 
@@ -68,23 +85,27 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
     }
 
 
-    @Override
-    public void onRefresh() {
+    public void beginScan() {
+        scanItem.setEnabled(false);
+        activityIndicator.setVisibility(View.VISIBLE);
+
+        adapter.clear();
+
         Observable<List<SensePeripheral>> peripherals = SensePeripheral.discover(stack, new PeripheralCriteria());
         this.currentScan = bind(peripherals).subscribe(this::bindPeripherals, this::scanFailed);
     }
 
     public void bindPeripherals(@NonNull List<SensePeripheral> peripherals) {
-        swipeRefreshLayout.setRefreshing(false);
+        scanItem.setEnabled(true);
+        activityIndicator.setVisibility(View.GONE);
 
         adapter.clear();
         adapter.addAll(peripherals);
     }
 
     public void scanFailed(Throwable e) {
-        swipeRefreshLayout.setRefreshing(false);
-
-        adapter.clear();
+        scanItem.setEnabled(true);
+        activityIndicator.setVisibility(View.GONE);
 
         ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
         errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);

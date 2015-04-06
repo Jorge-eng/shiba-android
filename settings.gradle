@@ -1,2 +1,2 @@
-include ':app', ':buruberi'
-project(':buruberi').projectDir = new File('../buruberi-android/library')
+include ':app', ':buruberi:library'
+project(':buruberi:library').projectDir = new File('../buruberi-android/library')

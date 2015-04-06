@@ -38,6 +38,7 @@ public class SignInFragment extends ShibaFragment {
 
         this.email = (TextView) view.findViewById(R.id.fragment_sign_in_email);
         this.password = (TextView) view.findViewById(R.id.fragment_sign_in_password);
+        password.setOnEditorActionListener(new EditorActionHandler(() -> submit(password)));
 
         Button submit = (Button) view.findViewById(R.id.fragment_sign_in_submit);
         submit.setOnClickListener(this::submit);

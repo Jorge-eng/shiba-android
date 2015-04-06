@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/gap_large"
             android:inputType="textPassword"
-            android:imeOptions="actionDone|flagNoExtractUi"
+            android:imeOptions="actionGo|flagNoExtractUi"
             android:hint="@string/title_password" />
 
         <Button
