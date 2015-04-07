@@ -18,7 +18,7 @@ import is.hello.shiba.api.model.Environment;
 import is.hello.shiba.api.model.OAuthCredentials;
 import is.hello.shiba.graph.ApiPresenter;
 import is.hello.shiba.graph.ShibaFragment;
-import is.hello.shiba.ui.adapter.SimpleAdapter;
+import is.hello.shiba.ui.adapter.SimpleSpinnerAdapter;
 import is.hello.shiba.ui.dialogs.ErrorDialogFragment;
 import is.hello.shiba.ui.dialogs.LoadingDialogFragment;
 import is.hello.shiba.ui.util.EditorActionHandler;
@@ -36,7 +36,7 @@ public class SignInFragment extends ShibaFragment {
 
         this.environment = (Spinner) view.findViewById(R.id.fragment_sign_in_environment);
 
-        SimpleAdapter<Environment> adapter = new SimpleAdapter<>(getActivity(), e -> e.host, null);
+        SimpleSpinnerAdapter<Environment> adapter = new SimpleSpinnerAdapter<>(getActivity(), e -> e.host);
         adapter.addAll(Environment.getAll());
         environment.setAdapter(adapter);
 

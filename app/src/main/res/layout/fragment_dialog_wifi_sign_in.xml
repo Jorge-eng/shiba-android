@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/gap_outer">
+
+    <EditText
+        android:id="@+id/fragment_dialog_wifi_sign_in_network"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/gap_small"
+        android:nextFocusForward="@+id/fragment_dialog_wifi_sign_in_pass"
+        android:imeOptions="flagNoExtractUi|actionNext"
+        android:inputType="text"
+        android:hint="@string/title_network"/>
+
+    <EditText
+        android:id="@+id/fragment_dialog_wifi_sign_in_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/gap_small"
+        android:imeOptions="flagNoExtractUi|actionGo"
+        android:inputType="textVisiblePassword"
+        android:hint="@string/title_password">
+
+        <requestFocus />
+
+    </EditText>
+
+    <Spinner
+        android:id="@+id/fragment_dialog_wifi_sign_in_security"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -24,7 +24,7 @@ import is.hello.shiba.R;
 import is.hello.shiba.graph.SensePresenter;
 import is.hello.shiba.graph.ShibaFragment;
 import is.hello.shiba.ui.MainActivity;
-import is.hello.shiba.ui.adapter.SimpleAdapter;
+import is.hello.shiba.ui.adapter.SimpleListAdapter;
 import is.hello.shiba.ui.dialogs.ErrorDialogFragment;
 import is.hello.shiba.ui.dialogs.LoadingDialogFragment;
 import is.hello.shiba.ui.util.Styles;
@@ -38,13 +38,13 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
     private ProgressBar activityIndicator;
     private MenuItem scanItem;
     private Subscription currentScan;
-    private SimpleAdapter<SensePeripheral> adapter;
+    private SimpleListAdapter<SensePeripheral> adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.adapter = new SimpleAdapter<>(getActivity(), SensePeripheral::getName, SensePeripheral::getDeviceId);
+        this.adapter = new SimpleListAdapter<>(getActivity(), SensePeripheral::getName, SensePeripheral::getDeviceId);
 
         setRetainInstance(true);
     }

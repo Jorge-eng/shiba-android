@@ -12,15 +12,15 @@ import android.widget.TextView;
 import is.hello.shiba.R;
 import rx.functions.Func1;
 
-public class SimpleAdapter<T> extends ArrayAdapter<T> {
+public class SimpleListAdapter<T> extends ArrayAdapter<T> {
     private final Func1<T, String> getTitle;
     private final Func1<T, String> getDetails;
     private final LayoutInflater inflater;
 
-    public SimpleAdapter(@NonNull Context context,
-                         @NonNull Func1<T, String> getTitle,
-                         @Nullable Func1<T, String> getDetails) {
-        super(context, R.layout.item_detail);
+    public SimpleListAdapter(@NonNull Context context,
+                             @NonNull Func1<T, String> getTitle,
+                             @Nullable Func1<T, String> getDetails) {
+        super(context, R.layout.item_simple_list);
 
         this.getTitle = getTitle;
         this.getDetails = getDetails;
@@ -32,7 +32,7 @@ public class SimpleAdapter<T> extends ArrayAdapter<T> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = inflater.inflate(R.layout.item_detail, parent, false);
+            view = inflater.inflate(R.layout.item_simple_list, parent, false);
             view.setTag(new ViewHolder(view));
         }
 
