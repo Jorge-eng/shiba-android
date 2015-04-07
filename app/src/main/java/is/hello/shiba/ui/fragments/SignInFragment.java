@@ -1,4 +1,4 @@
-package is.hello.shiba.ui;
+package is.hello.shiba.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +18,10 @@ import is.hello.shiba.api.model.Environment;
 import is.hello.shiba.api.model.OAuthCredentials;
 import is.hello.shiba.graph.ApiPresenter;
 import is.hello.shiba.graph.ShibaFragment;
+import is.hello.shiba.ui.adapter.SimpleAdapter;
+import is.hello.shiba.ui.dialogs.ErrorDialogFragment;
+import is.hello.shiba.ui.dialogs.LoadingDialogFragment;
+import is.hello.shiba.ui.util.EditorActionHandler;
 
 public class SignInFragment extends ShibaFragment {
     @Inject ApiPresenter api;

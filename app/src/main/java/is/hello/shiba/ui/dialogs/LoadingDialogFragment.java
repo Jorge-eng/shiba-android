@@ -1,4 +1,4 @@
-package is.hello.shiba.ui;
+package is.hello.shiba.ui.dialogs;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;

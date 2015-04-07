@@ -1,4 +1,4 @@
-package is.hello.shiba.ui;
+package is.hello.shiba.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

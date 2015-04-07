@@ -1,4 +1,4 @@
-package is.hello.shiba.ui;
+package is.hello.shiba.ui.fragments;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import is.hello.buruberi.bluetooth.stacks.BluetoothStack;
 import is.hello.shiba.R;
 import is.hello.shiba.graph.ApiPresenter;
 import is.hello.shiba.graph.ShibaFragment;
+import is.hello.shiba.ui.MainActivity;
 
 public class LandingFragment extends ShibaFragment {
     @Inject ApiPresenter api;

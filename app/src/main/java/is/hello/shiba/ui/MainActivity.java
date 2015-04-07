@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import is.hello.shiba.R;
 import is.hello.shiba.graph.ShibaFragment;
+import is.hello.shiba.ui.fragments.LandingFragment;
 
 public class MainActivity extends ActionBarActivity {
     @Override

@@ -1,4 +1,4 @@
-package is.hello.shiba.ui;
+package is.hello.shiba.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +19,8 @@ import is.hello.buruberi.bluetooth.devices.SensePeripheral;
 import is.hello.shiba.R;
 import is.hello.shiba.graph.SensePresenter;
 import is.hello.shiba.graph.ShibaFragment;
+import is.hello.shiba.ui.adapter.SimpleAdapter;
+import is.hello.shiba.ui.dialogs.ErrorDialogFragment;
 import rx.Observable;
 import rx.Subscription;
 

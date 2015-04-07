@@ -1,4 +1,4 @@
-package is.hello.shiba.ui;
+package is.hello.shiba.ui.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

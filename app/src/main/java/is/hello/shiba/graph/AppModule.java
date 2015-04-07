@@ -7,11 +7,11 @@ import dagger.Module;
 import dagger.Provides;
 import is.hello.buruberi.bluetooth.BuruberiModule;
 import is.hello.shiba.api.ApiModule;
-import is.hello.shiba.ui.LandingFragment;
-import is.hello.shiba.ui.ScanFragment;
-import is.hello.shiba.ui.SenseFragment;
-import is.hello.shiba.ui.SignInFragment;
-import is.hello.shiba.ui.WiFiFragment;
+import is.hello.shiba.ui.fragments.LandingFragment;
+import is.hello.shiba.ui.fragments.ScanFragment;
+import is.hello.shiba.ui.fragments.SenseFragment;
+import is.hello.shiba.ui.fragments.SignInFragment;
+import is.hello.shiba.ui.fragments.WiFiFragment;
 
 @SuppressWarnings("UnusedDeclaration")
 @Module(
