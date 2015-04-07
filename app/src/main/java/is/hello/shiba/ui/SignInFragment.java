@@ -14,9 +14,9 @@ import android.widget.TextView;
 import javax.inject.Inject;
 
 import is.hello.shiba.R;
-import is.hello.shiba.api.ApiPresenter;
 import is.hello.shiba.api.model.Environment;
 import is.hello.shiba.api.model.OAuthCredentials;
+import is.hello.shiba.graph.ApiPresenter;
 import is.hello.shiba.graph.ShibaFragment;
 
 public class SignInFragment extends ShibaFragment {

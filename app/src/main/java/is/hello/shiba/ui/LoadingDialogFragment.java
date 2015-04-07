@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 
@@ -12,11 +13,14 @@ import is.hello.shiba.R;
 public class LoadingDialogFragment extends DialogFragment {
     public static final String TAG = LoadingDialogFragment.class.getSimpleName();
 
-    public static void show(@NonNull FragmentManager fm) {
-        if (fm.findFragmentByTag(TAG) == null) {
-            LoadingDialogFragment loadingDialogFragment = new LoadingDialogFragment();
+    public static LoadingDialogFragment show(@NonNull FragmentManager fm) {
+        LoadingDialogFragment loadingDialogFragment = (LoadingDialogFragment) fm.findFragmentByTag(TAG);
+        if (loadingDialogFragment == null) {
+            loadingDialogFragment = new LoadingDialogFragment();
             loadingDialogFragment.show(fm, TAG);
         }
+
+        return loadingDialogFragment;
     }
 
     public static void close(@NonNull FragmentManager fm) {
@@ -33,5 +37,14 @@ public class LoadingDialogFragment extends DialogFragment {
         dialog.setMessage(getString(R.string.title_loading));
         dialog.setIndeterminate(true);
         return dialog;
+    }
+
+
+    public void setMessage(@NonNull String message) {
+        ((ProgressDialog) getDialog()).setMessage(message);
+    }
+
+    public void setMessage(@StringRes int messageRes) {
+        setMessage(getString(messageRes));
     }
 }

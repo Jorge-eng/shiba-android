@@ -1,4 +1,4 @@
-package is.hello.shiba.api;
+package is.hello.shiba.graph;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +11,7 @@ import com.squareup.okhttp.OkHttpClient;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import is.hello.shiba.api.ApiService;
 import is.hello.shiba.api.model.Environment;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;

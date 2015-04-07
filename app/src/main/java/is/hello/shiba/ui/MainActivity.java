@@ -1,10 +1,10 @@
 package is.hello.shiba.ui;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
     public void pushFragment(@NonNull ShibaFragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.activity_home_container, fragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .addToBackStack(fragment.getClass().getName())
                 .commit();
     }

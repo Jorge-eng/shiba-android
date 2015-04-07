@@ -9,6 +9,7 @@ import is.hello.buruberi.bluetooth.BuruberiModule;
 import is.hello.shiba.api.ApiModule;
 import is.hello.shiba.ui.LandingFragment;
 import is.hello.shiba.ui.ScanFragment;
+import is.hello.shiba.ui.SenseFragment;
 import is.hello.shiba.ui.SignInFragment;
 
 @SuppressWarnings("UnusedDeclaration")
@@ -17,6 +18,8 @@ import is.hello.shiba.ui.SignInFragment;
                 LandingFragment.class,
                 ScanFragment.class,
                 SignInFragment.class,
+                SenseFragment.class,
+                SensePresenter.class,
         },
         includes = {
                 BuruberiModule.class, ApiModule.class

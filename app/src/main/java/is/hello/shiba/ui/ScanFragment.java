@@ -16,16 +16,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import is.hello.buruberi.bluetooth.devices.HelloPeripheral;
 import is.hello.buruberi.bluetooth.devices.SensePeripheral;
 import is.hello.buruberi.bluetooth.stacks.BluetoothStack;
 import is.hello.buruberi.bluetooth.stacks.util.PeripheralCriteria;
 import is.hello.shiba.R;
+import is.hello.shiba.graph.SensePresenter;
 import is.hello.shiba.graph.ShibaFragment;
 import rx.Observable;
 import rx.Subscription;
 
 public class ScanFragment extends ShibaFragment implements AdapterView.OnItemClickListener {
     @Inject BluetoothStack stack;
+    @Inject SensePresenter sensePresenter;
 
     private ProgressBar activityIndicator;
     private MenuItem scanItem;
@@ -35,6 +38,8 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.adapter = new SimpleAdapter<>(getActivity(), SensePeripheral::getName, SensePeripheral::getDeviceId);
 
         setRetainInstance(true);
     }
@@ -64,7 +69,6 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
         ListView listView = (ListView) view.findViewById(android.R.id.list);
         listView.setOnItemClickListener(this);
 
-        this.adapter = new SimpleAdapter<>(getActivity(), SensePeripheral::getName, SensePeripheral::getDeviceId);
         listView.setAdapter(adapter);
 
         return view;
@@ -81,7 +85,21 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        SensePeripheral sense = (SensePeripheral) parent.getItemAtPosition(position);
 
+        LoadingDialogFragment loadingDialogFragment = LoadingDialogFragment.show(getFragmentManager());
+        bind(sensePresenter.connectTo(sense)).subscribe(status -> {
+            if (status == HelloPeripheral.ConnectStatus.CONNECTED) {
+                loadingDialogFragment.dismiss();
+                ((MainActivity) getActivity()).pushFragment(new SenseFragment());
+            } else {
+                loadingDialogFragment.setMessage(status.toString());
+            }
+        }, e -> {
+            loadingDialogFragment.dismiss();
+            ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
+            errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
+        });
     }
 
 

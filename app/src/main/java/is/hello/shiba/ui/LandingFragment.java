@@ -14,7 +14,7 @@ import javax.inject.Inject;
 
 import is.hello.buruberi.bluetooth.stacks.BluetoothStack;
 import is.hello.shiba.R;
-import is.hello.shiba.api.ApiPresenter;
+import is.hello.shiba.graph.ApiPresenter;
 import is.hello.shiba.graph.ShibaFragment;
 
 public class LandingFragment extends ShibaFragment {
