@@ -208,7 +208,7 @@ public class SenseFragment extends ShibaFragment {
     }
 
     public void setWifiNetwork() {
-
+        ((MainActivity) getActivity()).pushFragment(new WiFiFragment());
     }
 
     public void pairPillMode() {

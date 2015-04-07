@@ -11,6 +11,7 @@ import is.hello.shiba.ui.LandingFragment;
 import is.hello.shiba.ui.ScanFragment;
 import is.hello.shiba.ui.SenseFragment;
 import is.hello.shiba.ui.SignInFragment;
+import is.hello.shiba.ui.WiFiFragment;
 
 @SuppressWarnings("UnusedDeclaration")
 @Module(
@@ -20,6 +21,7 @@ import is.hello.shiba.ui.SignInFragment;
                 SignInFragment.class,
                 SenseFragment.class,
                 SensePresenter.class,
+                WiFiFragment.class,
         },
         includes = {
                 BuruberiModule.class, ApiModule.class
