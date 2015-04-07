@@ -53,6 +53,8 @@ public class SenseFragment extends ShibaFragment {
         toolbar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_disconnect: {
+                    stopListeningForDisconnects();
+                    sense.disconnect().subscribe();
                     getFragmentManager().popBackStack();
                     return true;
                 }
@@ -79,14 +81,6 @@ public class SenseFragment extends ShibaFragment {
         activityIndicator.setVisibility(View.VISIBLE);
         listView.setVisibility(View.GONE);
         bind(sense.peripheral).subscribe(this::bindSense, this::senseUnavailable);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        stopListeningForDisconnects();
-        sense.disconnect().subscribe();
     }
 
     //region Bindings
