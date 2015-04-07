@@ -27,6 +27,7 @@ import is.hello.shiba.ui.MainActivity;
 import is.hello.shiba.ui.adapter.SimpleAdapter;
 import is.hello.shiba.ui.dialogs.ErrorDialogFragment;
 import is.hello.shiba.ui.dialogs.LoadingDialogFragment;
+import is.hello.shiba.ui.util.Styles;
 import rx.Observable;
 import rx.Subscription;
 
@@ -97,7 +98,7 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
                 loadingDialogFragment.dismiss();
                 ((MainActivity) getActivity()).pushFragment(new SenseFragment());
             } else {
-                loadingDialogFragment.setMessage(status.toString());
+                loadingDialogFragment.setMessage(Styles.getConnectStatusStringRes(status));
             }
         }, e -> {
             loadingDialogFragment.dismiss();

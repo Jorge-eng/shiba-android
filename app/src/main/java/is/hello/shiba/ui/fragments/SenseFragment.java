@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -33,6 +34,8 @@ public class SenseFragment extends ShibaFragment {
     @Inject SensePresenter sense;
 
     private Toolbar toolbar;
+    private MenuItem disconnectItem;
+
     private ProgressBar activityIndicator;
     private ListView listView;
     private CommandAdapter adapter;
@@ -54,11 +57,11 @@ public class SenseFragment extends ShibaFragment {
 
         this.toolbar = (Toolbar) view.findViewById(R.id.fragment_sense_toolbar);
         toolbar.inflateMenu(R.menu.menu_sense);
+        this.disconnectItem = toolbar.getMenu().findItem(R.id.action_disconnect);
         toolbar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_disconnect: {
-                    stopListeningForDisconnects();
-                    sense.disconnect().subscribe();
+                    disconnect();
                     getFragmentManager().popBackStack();
                     return true;
                 }
@@ -87,6 +90,13 @@ public class SenseFragment extends ShibaFragment {
         bind(sense.peripheral).subscribe(this::bindSense, this::senseUnavailable);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        disconnect();
+
+        return super.onBackPressed();
+    }
+
     //region Bindings
 
     public void bindSense(@NonNull SensePeripheral sense) {
@@ -109,7 +119,12 @@ public class SenseFragment extends ShibaFragment {
     //endregion
 
 
-    //region Connection Losses
+    //region Connections
+
+    private void disconnect() {
+        stopListeningForDisconnects();
+        sense.disconnect().subscribe();
+    }
 
     private void startListeningForDisconnects(@NonNull SensePeripheral sense) {
         stopListeningForDisconnects();
@@ -132,7 +147,9 @@ public class SenseFragment extends ShibaFragment {
     }
 
     public void onSenseDisconnected(@NonNull SensePeripheral sense) {
-        clearActions();
+        stopListeningForDisconnects();
+        adapter.clear();
+        disconnectItem.setEnabled(false);
     }
 
     //endregion
@@ -154,10 +171,6 @@ public class SenseFragment extends ShibaFragment {
         adapter.addItem(R.string.action_trippy_led, this::trippyLedAnimation);
         adapter.addItem(R.string.action_stop_led_animated, this::stopAnimationWithFade);
         adapter.addItem(R.string.action_stop_led, this::stopAnimationWithoutFade);
-    }
-
-    private void clearActions() {
-        adapter.clear();
     }
 
     private <T> void doSimpleCommand(@NonNull Observable<T> command) {

@@ -11,6 +11,10 @@ public class ShibaFragment extends Fragment {
         ShibaApplication.getInstance().inject(this);
     }
 
+    public boolean onBackPressed() {
+        return false;
+    }
+
     protected <T> Observable<T> bind(@NonNull Observable<T> observable) {
         return AndroidObservable.bindFragment(this, observable);
     }

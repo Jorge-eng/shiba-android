@@ -21,6 +21,7 @@ import is.hello.shiba.graph.SensePresenter;
 import is.hello.shiba.graph.ShibaFragment;
 import is.hello.shiba.ui.adapter.SimpleAdapter;
 import is.hello.shiba.ui.dialogs.ErrorDialogFragment;
+import is.hello.shiba.ui.util.Styles;
 import rx.Observable;
 import rx.Subscription;
 
@@ -40,7 +41,7 @@ public class WiFiFragment extends ShibaFragment implements SwipeRefreshLayout.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.adapter = new SimpleAdapter<>(getActivity(), wifi_endpoint::getSsid, e -> e.getSecurityType().toString());
+        this.adapter = new SimpleAdapter<>(getActivity(), wifi_endpoint::getSsid, e -> getString(Styles.getSecTypeStringRes(e.getSecurityType())));
 
         setRetainInstance(true);
     }

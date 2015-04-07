@@ -9,6 +9,7 @@
     <string name="title_api_host">Currently Targeting</string>
     <string name="title_device_support_level">Device Support Level</string>
     <string name="title_sense">Sense</string>
+    <string name="title_wifi_networks">Scan for WiFi networks</string>
 
     <string name="message_confirm_sign_out">Are you sure you want to sign out?</string>
 
@@ -29,6 +30,14 @@
     <string name="action_trippy_led">Trippy LED</string>
     <string name="action_stop_led_animated">Stop LED Animated</string>
     <string name="action_stop_led">Stop LED</string>
+    <string name="action_connect">Connect</string>
     <string name="action_disconnect">Disconnect</string>
-    <string name="title_wifi_networks">Scan for WiFi networks</string>
+
+    <string name="status_connecting">Connecting…</string>
+    <string name="status_discovering_services">Discovering Services…</string>
+
+    <string name="security_type_open">Open</string>
+    <string name="security_type_wep">WEP</string>
+    <string name="security_type_wpa">WPA</string>
+    <string name="security_type_wpa2">WPA2</string>
 </resources>
