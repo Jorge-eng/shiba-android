@@ -4,8 +4,9 @@ import android.app.Application;
 
 import dagger.ObjectGraph;
 import is.hello.buruberi.bluetooth.BuruberiModule;
-import is.hello.buruberi.bluetooth.logging.LogCatLoggerFacade;
 import is.hello.shiba.api.ApiModule;
+import is.hello.shiba.logging.DatabaseLoggerFacade;
+import is.hello.shiba.logging.LogDatabase;
 
 public class ShibaApplication extends Application {
     private static ShibaApplication instance = null;
@@ -25,9 +26,10 @@ public class ShibaApplication extends Application {
     }
 
     private void buildGraph() {
+        LogDatabase.init(this);
         this.graph = ObjectGraph.create(
             new ApiModule(),
-            new BuruberiModule(this, e -> {}, new LogCatLoggerFacade()),
+            new BuruberiModule(this, e -> {}, DatabaseLoggerFacade.getInstance()),
             new AppModule(this)
         );
     }

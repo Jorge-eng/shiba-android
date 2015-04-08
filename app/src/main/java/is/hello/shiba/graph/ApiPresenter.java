@@ -11,22 +11,27 @@ import com.squareup.okhttp.OkHttpClient;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import is.hello.buruberi.bluetooth.logging.LoggerFacade;
 import is.hello.shiba.api.ApiService;
 import is.hello.shiba.api.model.Environment;
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.JacksonConverter;
 import rx.subjects.ReplaySubject;
 
-@Singleton public class ApiPresenter {
+@Singleton public class ApiPresenter implements RestAdapter.Log, RequestInterceptor {
     public static final String PREFS_NAME = "Api";
     public static final String PREF_ACCESS_TOKEN = "access_token";
     public static final String PREF_ENVIRONMENT_HOST = "environment_host";
     public static final String PREF_ENVIRONMENT_CLIENT_ID = "environment_client_id";
     public static final String PREF_ENVIRONMENT_CLIENT_SECRET = "environment_client_secret";
 
+    private static final String RETROFIT_LOG_TAG = "Retrofit";
+
     private final ObjectMapper objectMapper;
     private final OkHttpClient httpClient;
+    private final LoggerFacade logger;
     private final SharedPreferences preferences;
 
     public final ReplaySubject<ApiService> service = ReplaySubject.createWithSize(1);
@@ -35,9 +40,11 @@ import rx.subjects.ReplaySubject;
 
     @Inject ApiPresenter(@NonNull Context appContext,
                          @NonNull ObjectMapper objectMapper,
-                         @NonNull OkHttpClient httpClient) {
+                         @NonNull OkHttpClient httpClient,
+                         @NonNull LoggerFacade logger) {
         this.objectMapper = objectMapper;
         this.httpClient = httpClient;
+        this.logger = logger;
         this.preferences = appContext.getSharedPreferences(PREFS_NAME, 0);
 
         this.accessToken.onNext(retrieveAccessToken());
@@ -52,13 +59,9 @@ import rx.subjects.ReplaySubject;
         builder.setClient(new OkClient(httpClient));
         builder.setConverter(new JacksonConverter(objectMapper));
         builder.setLogLevel(RestAdapter.LogLevel.FULL);
+        builder.setLog(this);
         builder.setEndpoint(environment.host);
-        builder.setRequestInterceptor(request -> {
-            String accessToken = retrieveAccessToken();
-            if (!TextUtils.isEmpty(accessToken)) {
-                request.addHeader("Authorization", "Bearer " + accessToken);
-            }
-        });
+        builder.setRequestInterceptor(this);
         return builder.build();
     }
 
@@ -108,6 +111,24 @@ import rx.subjects.ReplaySubject;
 
     private String retrieveAccessToken() {
         return preferences.getString(PREF_ACCESS_TOKEN, null);
+    }
+
+    //endregion
+
+
+    //region Retrofit
+
+    @Override
+    public void log(String message) {
+        logger.info(RETROFIT_LOG_TAG, message);
+    }
+
+    @Override
+    public void intercept(RequestFacade request) {
+        String accessToken = retrieveAccessToken();
+        if (!TextUtils.isEmpty(accessToken)) {
+            request.addHeader("Authorization", "Bearer " + accessToken);
+        }
     }
 
     //endregion

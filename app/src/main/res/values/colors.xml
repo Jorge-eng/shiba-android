@@ -3,4 +3,9 @@
     <color name="accent">#9F8CFF</color>
     <color name="accent_light">#cabefe</color>
     <color name="accent_dark">#735ecf</color>
+
+    <color name="log_error">#c62531</color>
+    <color name="log_warning">#b9801d</color>
+    <color name="log_info">#21ae89</color>
+    <color name="log_debug">#3b3b3b</color>
 </resources>
