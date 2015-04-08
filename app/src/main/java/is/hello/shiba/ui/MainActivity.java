@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import is.hello.shiba.R;
 import is.hello.shiba.graph.ShibaFragment;
-import is.hello.shiba.ui.fragments.LandingFragment;
+import is.hello.shiba.ui.fragments.TestRunFragment;
 
 public class MainActivity extends ActionBarActivity {
     @Override
@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentById(R.id.activity_home_container) == null) {
             fm.beginTransaction()
-              .add(R.id.activity_home_container, new LandingFragment())
+              .add(R.id.activity_home_container, new TestRunFragment())
               .commit();
         }
     }

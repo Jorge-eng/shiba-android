@@ -7,10 +7,12 @@ import dagger.Module;
 import dagger.Provides;
 import is.hello.buruberi.bluetooth.BuruberiModule;
 import is.hello.shiba.api.ApiModule;
+import is.hello.shiba.graph.presenters.SensePresenter;
 import is.hello.shiba.ui.fragments.LandingFragment;
 import is.hello.shiba.ui.fragments.ScanFragment;
 import is.hello.shiba.ui.fragments.SenseFragment;
 import is.hello.shiba.ui.fragments.SignInFragment;
+import is.hello.shiba.ui.fragments.TestRunFragment;
 import is.hello.shiba.ui.fragments.WiFiFragment;
 
 @SuppressWarnings("UnusedDeclaration")
@@ -22,6 +24,7 @@ import is.hello.shiba.ui.fragments.WiFiFragment;
                 SenseFragment.class,
                 SensePresenter.class,
                 WiFiFragment.class,
+                TestRunFragment.class,
         },
         includes = {
                 BuruberiModule.class, ApiModule.class

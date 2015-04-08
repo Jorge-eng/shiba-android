@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import is.hello.shiba.graph.ApiPresenter;
+import is.hello.shiba.graph.presenters.ApiPresenter;
 
 @Module(
         injects = {

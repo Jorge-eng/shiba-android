@@ -20,8 +20,8 @@ import javax.inject.Inject;
 
 import is.hello.buruberi.bluetooth.stacks.BluetoothStack;
 import is.hello.shiba.R;
-import is.hello.shiba.graph.ApiPresenter;
 import is.hello.shiba.graph.ShibaFragment;
+import is.hello.shiba.graph.presenters.ApiPresenter;
 import is.hello.shiba.logging.LogAdapter;
 import is.hello.shiba.ui.MainActivity;
 

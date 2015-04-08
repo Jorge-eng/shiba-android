@@ -1,4 +1,4 @@
-package is.hello.shiba.graph;
+package is.hello.shiba.graph.presenters;
 
 import android.support.annotation.NonNull;
 import android.util.Pair;

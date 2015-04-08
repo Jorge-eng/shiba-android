@@ -20,8 +20,8 @@ import javax.inject.Inject;
 
 import is.hello.buruberi.bluetooth.devices.SensePeripheral;
 import is.hello.shiba.R;
-import is.hello.shiba.graph.SensePresenter;
 import is.hello.shiba.graph.ShibaFragment;
+import is.hello.shiba.graph.presenters.SensePresenter;
 import is.hello.shiba.ui.adapter.SimpleListAdapter;
 import is.hello.shiba.ui.dialogs.ErrorDialogFragment;
 import is.hello.shiba.ui.dialogs.LoadingDialogFragment;

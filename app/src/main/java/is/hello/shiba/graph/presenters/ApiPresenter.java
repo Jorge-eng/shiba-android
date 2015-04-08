@@ -1,4 +1,4 @@
-package is.hello.shiba.graph;
+package is.hello.shiba.graph.presenters;
 
 import android.content.Context;
 import android.content.SharedPreferences;

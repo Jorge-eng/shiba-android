@@ -43,4 +43,6 @@
     <string name="security_type_wpa">WPA</string>
     <string name="security_type_wpa2">WPA2</string>
     <string name="title_other_network">Other…</string>
+    <string name="title_test_run">Test Run</string>
+    <string name="action_start">Start</string>
 </resources>
