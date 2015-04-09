@@ -9,7 +9,27 @@
         android:id="@+id/fragment_test_run_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/title_test_run"/>
+        app:title="@string/title_simulate_on_boarding"/>
+
+    <CheckBox
+        android:id="@+id/fragment_test_run_include_delays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap_medium"
+        android:layout_marginLeft="@dimen/gap_medium"
+        android:layout_marginRight="@dimen/gap_medium"
+        android:checked="true"
+        android:text="@string/title_include_delays"/>
+
+    <CheckBox
+        android:id="@+id/fragment_test_run_randomize_delays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/gap_medium"
+        android:checked="false"
+        android:text="@string/title_randomize_delays"/>
+
+    <View style="@style/AppTheme.Divider.Vertical" />
 
     <ListView
         android:id="@android:id/list"

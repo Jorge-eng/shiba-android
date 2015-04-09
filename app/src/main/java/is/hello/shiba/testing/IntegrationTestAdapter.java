@@ -10,17 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import is.hello.shiba.R;
-import is.hello.shiba.ui.util.Optional;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 
-public class TestEventAdapter extends ArrayAdapter<TestRun.Event> implements Observer<TestRun.Event> {
+public class IntegrationTestAdapter extends ArrayAdapter<IntegrationEvent> implements Observer<IntegrationEvent> {
     private final LayoutInflater inflater;
 
     private @Nullable Subscription currentRun;
 
-    public TestEventAdapter(@NonNull Context context) {
+    public IntegrationTestAdapter(@NonNull Context context) {
         super(context, R.layout.item_log);
 
         this.inflater = LayoutInflater.from(context);
@@ -29,7 +28,7 @@ public class TestEventAdapter extends ArrayAdapter<TestRun.Event> implements Obs
 
     //region Observer
 
-    public void attach(@NonNull Observable<TestRun.Event> testRun) {
+    public void run(@NonNull Observable<IntegrationEvent> testRun) {
         if (currentRun != null) {
             currentRun.unsubscribe();
         }
@@ -42,11 +41,11 @@ public class TestEventAdapter extends ArrayAdapter<TestRun.Event> implements Obs
 
     @Override
     public void onError(Throwable e) {
-        add(new TestRun.Event(TestRun.Event.Type.RUN_FAILED, null, Optional.of(e)));
+        add(new IntegrationEvent(IntegrationEvent.Type.RUN_FAILED, e));
     }
 
     @Override
-    public void onNext(TestRun.Event event) {
+    public void onNext(IntegrationEvent event) {
         add(event);
     }
 
@@ -63,7 +62,7 @@ public class TestEventAdapter extends ArrayAdapter<TestRun.Event> implements Obs
         }
 
         TextView text = (TextView) view;
-        TestRun.Event event = getItem(position);
+        IntegrationEvent event = getItem(position);
         text.setText(event.toMessage());
 
         return view;

@@ -12,13 +12,20 @@
     <string name="title_wifi_networks">Scan for WiFi networks</string>
     <string name="title_network">Network</string>
     <string name="title_sign_into_wifi_network">Sign into WiFi network</string>
+    <string name="title_other_network">Other…</string>
+    <string name="title_simulate_on_boarding">Simulate on boarding</string>
+    <string name="title_include_delays">Include Delays</string>
+    <string name="title_randomize_delays">Randomize Delays</string>
 
     <string name="message_confirm_sign_out">Are you sure you want to sign out?</string>
+    <string name="message_generic_error">An unexpected error has occurred.</string>
+    <string name="message_access_token_required">Cannot simulate on boarding without being signed in.</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_sign_in">Sign In</string>
     <string name="action_sign_out">Sign Out</string>
     <string name="action_scan">Scan</string>
+    <string name="action_simulate_on_boarding">Simulate on boarding</string>
     <string name="action_put_into_normal_mode">Normal Mode</string>
     <string name="action_put_into_pairing_mode">Pairing Mode</string>
     <string name="action_forget_phone">Forget Phone</string>
@@ -34,6 +41,7 @@
     <string name="action_stop_led">Stop LED</string>
     <string name="action_connect">Connect</string>
     <string name="action_disconnect">Disconnect</string>
+    <string name="action_start">Start</string>
 
     <string name="status_connecting">Connecting…</string>
     <string name="status_discovering_services">Discovering Services…</string>
@@ -42,7 +50,4 @@
     <string name="security_type_wep">WEP</string>
     <string name="security_type_wpa">WPA</string>
     <string name="security_type_wpa2">WPA2</string>
-    <string name="title_other_network">Other…</string>
-    <string name="title_test_run">Test Run</string>
-    <string name="action_start">Start</string>
 </resources>

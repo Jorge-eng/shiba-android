@@ -3,7 +3,6 @@ package is.hello.shiba.graph.presenters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.okhttp.OkHttpClient;
@@ -14,6 +13,7 @@ import javax.inject.Singleton;
 import is.hello.buruberi.bluetooth.logging.LoggerFacade;
 import is.hello.shiba.api.ApiService;
 import is.hello.shiba.api.model.Environment;
+import is.hello.shiba.ui.util.Optional;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
@@ -36,7 +36,7 @@ import rx.subjects.ReplaySubject;
 
     public final ReplaySubject<ApiService> service = ReplaySubject.createWithSize(1);
     public final ReplaySubject<Environment> environment = ReplaySubject.createWithSize(1);
-    public final ReplaySubject<String> accessToken = ReplaySubject.createWithSize(1);
+    public final ReplaySubject<Optional<String>> accessToken = ReplaySubject.createWithSize(1);
 
     @Inject ApiPresenter(@NonNull Context appContext,
                          @NonNull ObjectMapper objectMapper,
@@ -99,18 +99,18 @@ import rx.subjects.ReplaySubject;
                 .remove(PREF_ACCESS_TOKEN)
                 .apply();
 
-        this.accessToken.onNext(null);
+        this.accessToken.onNext(Optional.empty());
     }
 
     public void storeAccessToken(@NonNull String accessToken) {
         preferences.edit()
                 .putString(PREF_ACCESS_TOKEN, accessToken)
                 .apply();
-        this.accessToken.onNext(accessToken);
+        this.accessToken.onNext(Optional.of(accessToken));
     }
 
-    private String retrieveAccessToken() {
-        return preferences.getString(PREF_ACCESS_TOKEN, null);
+    private Optional<String> retrieveAccessToken() {
+        return Optional.ofNullable(preferences.getString(PREF_ACCESS_TOKEN, null));
     }
 
     //endregion
@@ -125,10 +125,8 @@ import rx.subjects.ReplaySubject;
 
     @Override
     public void intercept(RequestFacade request) {
-        String accessToken = retrieveAccessToken();
-        if (!TextUtils.isEmpty(accessToken)) {
-            request.addHeader("Authorization", "Bearer " + accessToken);
-        }
+        Optional<String> accessToken = retrieveAccessToken();
+        accessToken.ifPresent(value -> request.addHeader("Authorization", "Bearer " + accessToken));
     }
 
     //endregion

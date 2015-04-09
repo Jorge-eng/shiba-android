@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 
 import is.hello.buruberi.util.Errors;
 import is.hello.shiba.R;
@@ -14,15 +16,32 @@ public class ErrorDialogFragment extends DialogFragment {
 
     private static final String ARG_MESSAGE = ErrorDialogFragment.class.getSimpleName() + ".ARG_MESSAGE";
 
-    public static ErrorDialogFragment newInstance(Throwable e) {
+    //region Creation
+
+    public static ErrorDialogFragment presentError(@NonNull FragmentManager fm, @Nullable Throwable e) {
+        ErrorDialogFragment errorDialogFragment = newInstance(e);
+        errorDialogFragment.show(fm, TAG);
+        return errorDialogFragment;
+    }
+
+    public static ErrorDialogFragment newInstance(@Nullable Throwable e) {
+        return newInstance(Errors.getDisplayMessage(e));
+    }
+
+    public static ErrorDialogFragment newInstance(@Nullable Errors.Message message) {
         ErrorDialogFragment dialogFragment = new ErrorDialogFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ARG_MESSAGE, Errors.getDisplayMessage(e));
+        bundle.putParcelable(ARG_MESSAGE, message);
         dialogFragment.setArguments(bundle);
 
         return dialogFragment;
     }
+
+    //endregion
+
+
+    //region Lifecycle
 
     @NonNull
     @Override
@@ -31,9 +50,15 @@ public class ErrorDialogFragment extends DialogFragment {
         builder.setTitle(R.string.title_error);
 
         Errors.Message message = getArguments().getParcelable(ARG_MESSAGE);
-        builder.setMessage(message.resolve(getActivity()));
+        if (message != null) {
+            builder.setMessage(message.resolve(getActivity()));
+        } else {
+            builder.setMessage(R.string.message_generic_error);
+        }
 
         builder.setPositiveButton(android.R.string.ok, null);
         return builder.create();
     }
+
+    //endregion
 }

@@ -78,6 +78,10 @@ public class WiFiSignInDialogFragment extends DialogFragment implements TextWatc
             password.setText(getInitialPassword());
         }
 
+        if (TextUtils.isEmpty(network.getText())) {
+            network.requestFocus();
+        }
+
         builder.setView(view);
 
         builder.setPositiveButton(R.string.action_sign_in, (dialog, which) -> submit());

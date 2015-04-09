@@ -67,7 +67,7 @@ public class LandingFragment extends ShibaFragment implements AdapterView.OnItem
 
         bind(api.environment).subscribe(environment -> host.setText(environment.host));
         bind(api.accessToken).subscribe(accessToken -> {
-            if (accessToken != null) {
+            if (accessToken.isPresent()) {
                 sessionButton.setOnClickListener(this::signOut);
                 sessionButton.setText(R.string.action_sign_out);
             } else {

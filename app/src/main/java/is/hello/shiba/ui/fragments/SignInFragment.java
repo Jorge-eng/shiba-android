@@ -69,9 +69,7 @@ public class SignInFragment extends ShibaFragment {
             getFragmentManager().popBackStack();
         }, e -> {
             LoadingDialogFragment.close(getFragmentManager());
-
-            ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
-            errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
+            ErrorDialogFragment.presentError(getFragmentManager(), e);
         });
     }
 }

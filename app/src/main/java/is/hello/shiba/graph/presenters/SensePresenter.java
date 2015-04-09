@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import is.hello.buruberi.bluetooth.devices.SensePeripheral;
+import is.hello.shiba.ui.util.Optional;
 import rx.Observable;
 import rx.subjects.ReplaySubject;
 
@@ -29,12 +30,12 @@ import rx.subjects.ReplaySubject;
     }
 
     public Observable<String> pairPill() {
-        Observable<Pair<SensePeripheral, String>> union = Observable.combineLatest(peripheral, api.accessToken, Pair::new);
-        return union.flatMap(p -> p.first.pairPill(p.second));
+        Observable<Pair<SensePeripheral, Optional<String>>> union = Observable.combineLatest(peripheral, api.accessToken, Pair::new);
+        return union.flatMap(p -> p.first.pairPill(p.second.get()));
     }
 
     public Observable<Void> linkAccount() {
-        Observable<Pair<SensePeripheral, String>> union = Observable.combineLatest(peripheral, api.accessToken, Pair::new);
-        return union.flatMap(p -> p.first.linkAccount(p.second));
+        Observable<Pair<SensePeripheral, Optional<String>>> union = Observable.combineLatest(peripheral, api.accessToken, Pair::new);
+        return union.flatMap(p -> p.first.linkAccount(p.second.get()));
     }
 }

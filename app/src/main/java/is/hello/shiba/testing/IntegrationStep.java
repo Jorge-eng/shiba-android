@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Scheduler;
 
-public class TestStep {
+public class IntegrationStep {
     private final String name;
     private final Observable<?> logic;
     private final long startDelay;
@@ -25,24 +25,17 @@ public class TestStep {
         }
     }
 
-    public static TestStep immediate(@NonNull String name, @NonNull Observable<?> logic) {
-        return new TestStep(name, logic, 0);
+    public static IntegrationStep withoutDelay(@NonNull String name, @NonNull Observable<?> logic) {
+        return new IntegrationStep(name, logic, 0);
     }
 
-    public static TestStep withDelay(@NonNull String name, @NonNull Observable<?> logic, long delay) {
-        return new TestStep(name, logic, delay);
+    public static IntegrationStep withDelay(@NonNull String name, @NonNull Observable<?> logic, long delay) {
+        return new IntegrationStep(name, logic, delay);
     }
 
-    public static TestStep withRandomizedDelay(@NonNull String name,
-                                               @NonNull Observable<?> logic,
-                                               long baseDelay,
-                                               float maxPaddingFactor) {
-        return new TestStep(name, logic, randomizeDelay(baseDelay, maxPaddingFactor));
-    }
-
-    public TestStep(@NonNull String name,
-                    @NonNull Observable<?> logic,
-                    long startDelay) {
+    public IntegrationStep(@NonNull String name,
+                           @NonNull Observable<?> logic,
+                           long startDelay) {
         this.name = name;
         this.logic = logic;
         this.startDelay = startDelay;

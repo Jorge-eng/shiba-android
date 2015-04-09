@@ -158,6 +158,7 @@ public class SenseFragment extends ShibaFragment {
     //region Actions
 
     private void showActions() {
+        adapter.addItem(R.string.action_simulate_on_boarding, this::simulateOnBoarding);
         adapter.addItem(R.string.action_put_into_normal_mode, this::putIntoNormalMode);
         adapter.addItem(R.string.action_put_into_pairing_mode, this::putIntoPairingMode);
         adapter.addItem(R.string.action_forget_phone, this::clearPairedPhone);
@@ -179,9 +180,12 @@ public class SenseFragment extends ShibaFragment {
             loadingDialogFragment.dismiss();
         }, e -> {
             loadingDialogFragment.dismiss();
-            ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
-            errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
+            ErrorDialogFragment.presentError(getFragmentManager(), e);
         });
+    }
+
+    public void simulateOnBoarding() {
+        ((MainActivity) getActivity()).pushFragment(new OnBoardingSimulatorFragment());
     }
 
     public void putIntoNormalMode() {
@@ -213,8 +217,7 @@ public class SenseFragment extends ShibaFragment {
             builder.create().show();
         }, e -> {
             loadingDialogFragment.dismiss();
-            ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
-            errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
+            ErrorDialogFragment.presentError(getFragmentManager(), e);
         });
     }
 

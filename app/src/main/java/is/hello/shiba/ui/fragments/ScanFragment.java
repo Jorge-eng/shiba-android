@@ -102,8 +102,7 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
             }
         }, e -> {
             loadingDialogFragment.dismiss();
-            ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
-            errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
+            ErrorDialogFragment.presentError(getFragmentManager(), e);
         });
     }
 
@@ -130,7 +129,6 @@ public class ScanFragment extends ShibaFragment implements AdapterView.OnItemCli
         scanItem.setEnabled(true);
         activityIndicator.setVisibility(View.GONE);
 
-        ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
-        errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
+        ErrorDialogFragment.presentError(getFragmentManager(), e);
     }
 }

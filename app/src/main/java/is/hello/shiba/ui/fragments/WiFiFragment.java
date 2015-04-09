@@ -124,8 +124,7 @@ public class WiFiFragment extends ShibaFragment implements SwipeRefreshLayout.On
         swipeRefreshLayout.setEnabled(true);
         this.scanning = null;
 
-        ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
-        errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
+        ErrorDialogFragment.presentError(getFragmentManager(), e);
     }
 
 
@@ -166,8 +165,7 @@ public class WiFiFragment extends ShibaFragment implements SwipeRefreshLayout.On
             getFragmentManager().popBackStack();
         }, e -> {
             LoadingDialogFragment.close(getFragmentManager());
-            ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(e);
-            errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
+            ErrorDialogFragment.presentError(getFragmentManager(), e);
         });
     }
 }
