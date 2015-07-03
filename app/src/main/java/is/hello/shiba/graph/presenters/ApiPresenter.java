@@ -10,7 +10,7 @@ import com.squareup.okhttp.OkHttpClient;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import is.hello.buruberi.bluetooth.logging.LoggerFacade;
+import is.hello.buruberi.bluetooth.stacks.util.LoggerFacade;
 import is.hello.shiba.api.ApiService;
 import is.hello.shiba.api.model.Environment;
 import is.hello.shiba.ui.util.Optional;

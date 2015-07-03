@@ -3,9 +3,7 @@ package is.hello.shiba.graph;
 import android.app.Application;
 
 import dagger.ObjectGraph;
-import is.hello.buruberi.bluetooth.BuruberiModule;
 import is.hello.shiba.api.ApiModule;
-import is.hello.shiba.logging.DatabaseLoggerFacade;
 import is.hello.shiba.logging.LogDatabase;
 
 public class ShibaApplication extends Application {
@@ -29,7 +27,7 @@ public class ShibaApplication extends Application {
         LogDatabase.init(this);
         this.graph = ObjectGraph.create(
             new ApiModule(),
-            new BuruberiModule(this, e -> {}, DatabaseLoggerFacade.getInstance()),
+            new BluetoothModule(),
             new AppModule(this)
         );
     }

@@ -52,7 +52,7 @@ public class OnBoardingIntegrationSuite extends IntegrationSuite {
 
     @Step(3) IntegrationStep sendWiFiCredentials() {
         return IntegrationStep.withDelay("Connect to WiFi Network",
-                                         peripheral.setWifiNetwork(config.networkName, config.networkName, config.securityType, config.networkPassword),
+                                         peripheral.setWifiNetwork(config.networkName, config.securityType, config.networkPassword),
                                          createDelay(10, TimeUnit.SECONDS));
     }
 
@@ -100,7 +100,7 @@ public class OnBoardingIntegrationSuite extends IntegrationSuite {
             this.flags = flags;
         }
 
-        public static enum Flag {
+        public enum Flag {
             INCLUDE_DELAYS,
             RANDOMIZE_DELAYS,
         }

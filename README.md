@@ -1,7 +1,6 @@
-shiba-android
-=============
+# shiba-android
 
-An integration tool for Sense + Android.
+An integration test tool for Sense + Android.
 
     ─────────▄──────────────▄
     ────────▌▒█───────────▄▀▒▌

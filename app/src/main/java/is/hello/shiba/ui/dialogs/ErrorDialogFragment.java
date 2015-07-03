@@ -1,14 +1,15 @@
 package is.hello.shiba.ui.dialogs;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 
 import is.hello.buruberi.util.Errors;
+import is.hello.buruberi.util.StringRef;
 import is.hello.shiba.R;
 
 public class ErrorDialogFragment extends DialogFragment {
@@ -28,7 +29,7 @@ public class ErrorDialogFragment extends DialogFragment {
         return newInstance(Errors.getDisplayMessage(e));
     }
 
-    public static ErrorDialogFragment newInstance(@Nullable Errors.Message message) {
+    public static ErrorDialogFragment newInstance(@Nullable StringRef message) {
         ErrorDialogFragment dialogFragment = new ErrorDialogFragment();
 
         Bundle bundle = new Bundle();
@@ -49,7 +50,7 @@ public class ErrorDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.title_error);
 
-        Errors.Message message = getArguments().getParcelable(ARG_MESSAGE);
+        StringRef message = getArguments().getParcelable(ARG_MESSAGE);
         if (message != null) {
             builder.setMessage(message.resolve(getActivity()));
         } else {

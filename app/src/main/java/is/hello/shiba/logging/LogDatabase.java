@@ -99,13 +99,13 @@ public class LogDatabase extends SQLiteOpenHelper {
         });
     }
 
-    public void write(int level, @NonNull String tag, @NonNull String message) {
+    public void write(int level, @NonNull String tag, @Nullable String message) {
         workQueue.post(() -> {
             try {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(COLUMN_LEVEL, level);
                 contentValues.put(COLUMN_TAG, tag);
-                contentValues.put(COLUMN_MESSAGE, message);
+                contentValues.put(COLUMN_MESSAGE, message == null ? "" : message);
                 contentValues.put(COLUMN_TIME, DateTimeUtils.currentTimeMillis());
                 getWritableDatabase().insert(TABLE_LOGS, null, contentValues);
             } catch (SQLiteException e) {

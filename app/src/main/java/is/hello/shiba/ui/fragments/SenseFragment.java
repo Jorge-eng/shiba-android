@@ -28,7 +28,7 @@ import is.hello.shiba.ui.dialogs.LoadingDialogFragment;
 import rx.Observable;
 import rx.Subscription;
 
-import static rx.android.observables.AndroidObservable.fromLocalBroadcast;
+import static rx.android.content.ContentObservable.fromLocalBroadcast;
 
 public class SenseFragment extends ShibaFragment {
     @Inject SensePresenter sense;
@@ -189,11 +189,11 @@ public class SenseFragment extends ShibaFragment {
     }
 
     public void putIntoNormalMode() {
-        doSimpleCommand(sense.peripheral.flatMap(s -> s.setPairingModeEnabled(false)));
+        doSimpleCommand(sense.peripheral.flatMap(SensePeripheral::putIntoNormalMode));
     }
 
     public void putIntoPairingMode() {
-        doSimpleCommand(sense.peripheral.flatMap(s -> s.setPairingModeEnabled(true)));
+        doSimpleCommand(sense.peripheral.flatMap(SensePeripheral::putIntoPairingMode));
     }
 
     public void clearPairedPhone() {

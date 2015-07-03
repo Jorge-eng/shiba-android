@@ -157,7 +157,7 @@ public class WiFiFragment extends ShibaFragment implements SwipeRefreshLayout.On
     }
 
     public void signIntoNetwork(@NonNull String ssid, @Nullable String password, @NonNull sec_type securityType) {
-        Observable<Void> signIn = sense.peripheral.flatMap(p -> p.setWifiNetwork(ssid, ssid, securityType, password));
+        Observable<Void> signIn = sense.peripheral.flatMap(p -> p.setWifiNetwork(ssid, securityType, password));
 
         LoadingDialogFragment.show(getFragmentManager());
         bind(signIn).subscribe(ignored -> {

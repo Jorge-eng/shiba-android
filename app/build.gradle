@@ -18,7 +18,7 @@ android {
     defaultConfig {
         applicationId "is.hello.shiba"
         minSdkVersion 18
-        targetSdkVersion 21
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -53,7 +53,7 @@ retrolambda {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:appcompat-v7:22.2.0'
 
     provided 'com.squareup.dagger:dagger-compiler:1.2.2'
     compile 'com.squareup.dagger:dagger:1.2.2'
@@ -63,8 +63,8 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
     compile 'com.squareup.okhttp:okhttp:2.3.0'
 
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.2'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.5.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.3'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.5.3'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.2'
     compile('com.fasterxml.jackson.datatype:jackson-datatype-joda:2.4.3') {
         // We use a special distribution of joda-time which is packaged
@@ -73,7 +73,7 @@ dependencies {
         exclude group: 'joda-time'
     }
 
-    compile 'net.danlew:android.joda:2.7.1'
+    compile 'net.danlew:android.joda:2.7.2'
 
     compile 'io.reactivex:rxjava:1.0.0'
     compile 'io.reactivex:rxandroid:0.23.0'

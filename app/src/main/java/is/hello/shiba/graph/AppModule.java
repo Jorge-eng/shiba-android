@@ -3,11 +3,14 @@ package is.hello.shiba.graph;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
-import is.hello.buruberi.bluetooth.BuruberiModule;
+import is.hello.buruberi.bluetooth.stacks.util.LoggerFacade;
 import is.hello.shiba.api.ApiModule;
 import is.hello.shiba.graph.presenters.SensePresenter;
+import is.hello.shiba.logging.DatabaseLoggerFacade;
 import is.hello.shiba.ui.fragments.LandingFragment;
 import is.hello.shiba.ui.fragments.OnBoardingSimulatorFragment;
 import is.hello.shiba.ui.fragments.ScanFragment;
@@ -27,7 +30,7 @@ import is.hello.shiba.ui.fragments.WiFiFragment;
                 OnBoardingSimulatorFragment.class,
         },
         includes = {
-                BuruberiModule.class, ApiModule.class
+                BluetoothModule.class, ApiModule.class
         }
 )
 public class AppModule {
@@ -39,5 +42,9 @@ public class AppModule {
 
     @Provides Context providesAppContext() {
         return appContext;
+    }
+
+    @Singleton @Provides LoggerFacade provideLoggerFacade() {
+        return new DatabaseLoggerFacade();
     }
 }

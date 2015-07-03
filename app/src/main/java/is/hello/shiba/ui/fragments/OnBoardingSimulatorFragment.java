@@ -18,7 +18,7 @@ import java.util.EnumSet;
 import javax.inject.Inject;
 
 import is.hello.buruberi.bluetooth.devices.SensePeripheral;
-import is.hello.buruberi.util.Errors;
+import is.hello.buruberi.util.StringRef;
 import is.hello.shiba.R;
 import is.hello.shiba.graph.ShibaFragment;
 import is.hello.shiba.graph.presenters.ApiPresenter;
@@ -113,7 +113,7 @@ public class OnBoardingSimulatorFragment extends ShibaFragment {
 
             Optional<String> accessToken = tokenAndSense.first;
             if (!accessToken.isPresent()) {
-                Errors.Message message = Errors.Message.from(R.string.message_access_token_required);
+                StringRef message = StringRef.from(R.string.message_access_token_required);
                 ErrorDialogFragment errorDialogFragment = ErrorDialogFragment.newInstance(message);
                 errorDialogFragment.show(getFragmentManager(), ErrorDialogFragment.TAG);
                 return;
